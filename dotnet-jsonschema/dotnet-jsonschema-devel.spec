@@ -32,6 +32,8 @@ sed -i \
   -e '/<PackageReference Include="Microsoft.SourceLink.GitHub"/d' \
   -e '/<SignAssembly>true<\/SignAssembly>/d' \
   -e '/<AssemblyOriginatorKeyFile>/d' \
+  -e '/<PackageIcon>json-logo-256.png<\/PackageIcon>/d' \
+  -e '/<None Include="\.\.\\Resources\\json-logo-256\.png"/d' \
   src/JsonSchema/JsonSchema.csproj \
   src/JsonPointer/JsonPointer.csproj \
   src/Json.More/Json.More.csproj
@@ -64,6 +66,7 @@ dotnet build src/JsonSchema/JsonSchema.csproj --no-restore \
 dotnet pack src/JsonSchema/JsonSchema.csproj --no-restore \
   --configuration Release --output "%{_builddir}/nuget-feed" \
   -p:PackageVersion=%{version} -p:TargetFrameworks=net8.0 \
+  -p:IncludeBuildOutput=true \
   -p:EnablePackageValidation=false
 
 %install
