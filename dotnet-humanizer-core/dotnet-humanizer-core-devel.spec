@@ -10,6 +10,7 @@ BuildRequires:  dotnet-sdk-10.0
 BuildRequires:  dotnet-runtime-10.0
 BuildRequires:  dotnet-sdk-10.0-source-built-artifacts
 BuildRequires:  dotnet-targeting-pack-8.0
+BuildRequires:  aspnetcore-targeting-pack-8.0
 Requires:       dotnet-humanizer-core%{?_isa} = %{version}-%{release}
 BuildArch:      noarch
 
