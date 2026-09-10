@@ -29,7 +29,7 @@ sed -i \
   -e '/<PackageReference Include="Microsoft.SourceLink.GitHub"/d' \
   -e '/<SignAssembly>true<\/SignAssembly>/d' \
   -e '/<AssemblyOriginatorKeyFile>/d' \
-  src/JsonPointer/JsonPointer.csproj
+  src/JsonPointer/JsonPointer.csproj src/Json.More/Json.More.csproj
 
 %build
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
