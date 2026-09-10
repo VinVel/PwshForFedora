@@ -12,7 +12,7 @@ Source0:        %{url}/archive/%{commit}.tar.gz
 BuildRequires:  dotnet-sdk-10.0
 BuildRequires:  dotnet-runtime-10.0
 BuildRequires:  dotnet-sdk-10.0-source-built-artifacts
-BuildRequires:  dotnet-targeting-pack-8.0
+BuildRequires:  dotnet-targeting-pack-10.0
 BuildRequires:  dotnet-markdig-devel >= 0.44.0
 
 Requires:       dotnet-markdig >= 0.44.0
@@ -31,7 +31,7 @@ sed -i \
   -e '/<DelaySign>true<\/DelaySign>/d' \
   -e '/<AssemblyOriginatorKeyFile>/d' \
   -e '/<SignAssembly>true<\/SignAssembly>/d' \
-  -e 's#<TargetFramework>netstandard2.0</TargetFramework>#<TargetFramework>net8.0</TargetFramework>#' \
+  -e 's#<TargetFramework>netstandard2.0</TargetFramework>#<TargetFramework>net10.0</TargetFramework>#' \
   -e 's#Version="0.31.0"#Version="0.44.0"#' \
   src/Microsoft.PowerShell.MarkdownRender.csproj
 
@@ -52,16 +52,16 @@ dotnet restore src/Microsoft.PowerShell.MarkdownRender.csproj \
   --source "%{_builddir}/nuget-feed" \
   --source /usr/lib64/dotnet/library-packs \
   --source /usr/share/dotnet/nuget/dotnet-markdig-devel \
-  -p:NuGetAudit=false -p:TargetFrameworks=net8.0 \
+  -p:NuGetAudit=false -p:TargetFrameworks=net10.0 \
   -p:EnablePackageValidation=false
 dotnet build src/Microsoft.PowerShell.MarkdownRender.csproj --no-restore \
-  --configuration Release -p:TargetFrameworks=net8.0 \
+  --configuration Release -p:TargetFrameworks=net10.0 \
   -p:Version=%{version} -p:AssemblyVersion=%{version}.0 \
   -p:FileVersion=%{version}.0 -p:EnablePackageValidation=false
 
 %install
 install -Dpm0644 \
-  src/bin/Release/net8.0/Microsoft.PowerShell.MarkdownRender.dll \
+  src/bin/Release/net10.0/Microsoft.PowerShell.MarkdownRender.dll \
   %{buildroot}%{_libdir}/dotnet/%{name}/Microsoft.PowerShell.MarkdownRender.dll
 
 %check
