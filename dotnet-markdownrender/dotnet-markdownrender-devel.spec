@@ -37,8 +37,16 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export NUGET_PACKAGES="%{_builddir}/nuget-packages"
 mkdir -p "$NUGET_PACKAGES" "%{_builddir}/nuget-feed"
 
+source_built_artifacts=$(rpm -ql dotnet-sdk-10.0-source-built-artifacts | sed -n '/source-built-artifacts.*\.tar\.gz$/p' | head -n1)
+tar -xzf "$source_built_artifacts" -C "%{_builddir}/nuget-feed" \
+  --wildcards \
+  'Microsoft.AspNetCore.App.Ref.[0-9]*.nupkg' \
+  'Microsoft.NETCore.App.Ref.[0-9]*.nupkg' \
+  'Microsoft.NET.ILLink.Tasks.[0-9]*.nupkg'
+
 dotnet restore src/Microsoft.PowerShell.MarkdownRender.csproj \
   --ignore-failed-sources \
+  --source "%{_builddir}/nuget-feed" \
   --source /usr/lib64/dotnet/library-packs \
   --source /usr/share/dotnet/nuget/dotnet-markdig-devel \
   -p:NuGetAudit=false -p:TargetFrameworks=net8.0 \
