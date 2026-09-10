@@ -1,0 +1,20 @@
+# Source archives are downloaded by Get-Sources.ps1 and must not be committed.
+**/*.tar.gz
+**/*.tar.xz
+**/*.tar.bz2
+**/*.zip
+
+# Local RPM build output.
+**/*.rpm
+**/*.src.rpm
+**/*.log
+**/.build-*.log
+**/*-build/
+**/BUILD/
+**/BUILDROOT/
+**/RPMS/
+**/SRPMS/
+**/x86_64/
+**/noarch/
+**/results/
+**/results_*/
